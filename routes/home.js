@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
       code = Math.random().toString(36).slice(-5)
       let result = Link.findOne({
         where: {
-          shortUrl: `http://localhost:3000/${code}`
+          shortUrl: `https://jacs-url-shortener.herokuapp.com/${code}`
         }
       })
 
@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
     if (code) {
       Link.create({
         longUrl: req.body.url,
-        shortUrl: `http://localhost:3000/${code}`
+        shortUrl: `https://jacs-url-shortener.herokuapp.com/${code}`
       }).then((link) => {
         let success_msg = 'Create a new short url successfully!'
         res.render('index', { link: link, originalUrl: req.body.url, success_msg: success_msg })
@@ -68,12 +68,12 @@ router.post('/', async (req, res) => {
 router.get('/:id', (req, res) => {
   Link.findOne({
     where: {
-      shortUrl: `http://localhost:3000/${req.params.id}`
+      shortUrl: `https://jacs-url-shortener.herokuapp.com/${req.params.id}`
     }
   }).then((link) => {
     return res.redirect(`${link.longUrl}`)
   }).catch((e) => {
-    let warning_msg = `The short link "http://localhost:3000/${req.params.id}" is invalid!`
+    let warning_msg = `The short link "https://jacs-url-shortener.herokuapp.com/${req.params.id}" is invalid!`
     return res.render('index', { warning_msg: warning_msg })
   })
 })
