@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('../models')
 const Link = db.Link
+const https = require('https')
 
 router.get('/', (req, res) => {
   return res.render('index')
